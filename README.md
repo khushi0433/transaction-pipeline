@@ -6,7 +6,7 @@ Built for the Alemeno Backend + DevOps internship assignment.
 
 ## Why it's built this way
 
-The assignment data is intentionally messy: mixed date formats, dollar signs in amount fields, inconsistent casing, blank categories, duplicate rows, and a handful of transactions that are obviously too large to be normal. Doing all of that cleaning synchronously inside an HTTP request would mean the client sits there waiting while pandas chews through the file and the LLM gets called — and if the LLM is slow or rate limited, the request just hangs. So the upload endpoint does the bare minimum (save the file, create a job row, hand it off to Celery) and returns in milliseconds. Everything else happens in a worker process that the client polls for status.
+The assignment data is intentionally messy: mixed date formats, dollar signs in amount fields, inconsistent casing, blank categories, duplicate rows, and a handful of transactions that are obviously too large to be normal. Doing all of that cleaning synchronously inside an HTTP request would mean the client sits there waiting while pandas chews through the file and the LLM gets called and if the LLM is slow or rate limited, the request just hangs. So the upload endpoint does the bare minimum (save the file, create a job row, hand it off to Celery) and returns in milliseconds. Everything else happens in a worker process that the client polls for status.
 
 ## Stack
 
